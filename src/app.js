@@ -2,7 +2,11 @@ const express=require("express");
 
 const app=express();
 
-app.use("/Users",(req,res)=>{
+app.get("/Users",(req,res)=>{
+    res.send("Hello HEllo")
+});
+
+app.post("/Users",(req,res)=>{
     res.send("Hello HEllo")
 })
 
