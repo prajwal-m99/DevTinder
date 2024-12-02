@@ -1,38 +1,35 @@
-const express=require( "express");
-const connectdb = require("../config/database.js");
-const User=require("./models/user.js")
-
+const express = require("express");
+const connectDB = require("./config/database");
 const app = express();
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
+app.use(cookieParser());
 
-app.get("/feed", async(req,res)=>{
-    
- const data= await User.find({});
-     res.send(data);
-})
+const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile");
+const requestRouter = require("./routes/request");
+const userRouter = require("./routes/user");
 
-app.post("/signup", async(req,res)=>{
-    const user =new User(req.body);
-    try{
-        await user.save();
-        res.status(200).send("Users added successfully");
-    }
-    catch(error){
-        res.status(501).send("Not saved ",error);
-    }
-   
-});
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
+app.use("/", userRouter);
 
-// Wait for the database connection before starting the server
-connectdb().then(()=>{
-    console.log("Database connected successfully");
+connectDB()
+  .then(() => {
+    console.log("Database connection established...");
     app.listen(7777, () => {
-        console.log("Server successfully running on port 7777");
-      });
-}).catch((error) => {
-    console.error("DB connection failed", error);
+      console.log("Server is successfully listening on port 7777...");
+    });
+  })
+  .catch((err) => {
+    console.error("Database cannot be connected!!");
   });
-  
-
-

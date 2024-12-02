@@ -5,12 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "nodejs,javascript"
+    "dev": "nodemon src/app.js"
   },
   "keywords": [
     "nodejs",
@@ -18,10 +13,13 @@
   ],
   "author": "Prajwal",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^4.21.1",
-    "mongoose": "^8.8.3",
-    "nodemon": "^3.1.7"
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.1",
+    "validator": "^13.12.0"
   }
 }
